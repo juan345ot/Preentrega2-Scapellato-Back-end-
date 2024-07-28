@@ -20,8 +20,6 @@ app.set('views', __dirname + '/views');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Envía archivos estáticos desde el directorio 'public'
 app.use(express.static(__dirname + '/public'));
 
 app.use('/api/products', productsRouter);
@@ -30,21 +28,19 @@ app.use('/', viewsRouter);
 
 io.on('connection', (socket) => {
   console.log('cliente conectado');
-
-  // Obtener productos y asegurar que se envíe un array
   const sendProducts = async () => {
     let products = await productManager.getProducts();
     if (!Array.isArray(products)) {
-      products = [products]; // Convertir a array si es un solo producto
+      products = [products]; 
     }
     socket.emit('products', products);
   };
 
-  sendProducts(); // Enviar productos al conectar
+  sendProducts();
   socket.on('addProduct', async (newProduct) => {
     try {
       await productManager.addProduct(newProduct);
-      sendProducts(); // Enviar la lista actualizada
+      sendProducts();
     } catch (error) {
       console.error(error);
     }
@@ -53,7 +49,7 @@ io.on('connection', (socket) => {
   socket.on('deleteProduct', async (pid) => {
     try {
       await productManager.deleteProduct(pid);
-      sendProducts(); // Enviar la lista actualizada
+      sendProducts(); 
     } catch (error) {
       console.error(error);
     }
