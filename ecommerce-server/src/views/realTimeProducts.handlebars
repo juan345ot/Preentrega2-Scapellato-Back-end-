@@ -46,8 +46,6 @@
     const addProductForm = document.getElementById('add-product-form');
     const deleteProductForm = document.getElementById('delete-product-form');
 
-    const socket = io();
-
     socket.on('products', (products) => {
       productList.innerHTML = '';
       products.forEach(product => {

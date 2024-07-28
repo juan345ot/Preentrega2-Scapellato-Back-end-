@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "id": "41695e66-53e9-47d6-91e3-924327746ef8",
+    "title": "ab",
+    "description": "abc",
+    "code": "abcd",
+    "price": "10",
+    "status": true,
+    "stock": "10",
+    "category": "abcde"
+  }
+]
