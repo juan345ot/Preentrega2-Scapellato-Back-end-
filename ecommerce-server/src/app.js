@@ -54,6 +54,15 @@ io.on('connection', (socket) => {
       console.error(error);
     }
   });
+
+  socket.on('updateProduct', async (updatedProduct) => {
+    try {
+      await productManager.updateProduct(updatedProduct.id, updatedProduct);
+      sendProducts();
+    } catch (error) {
+      console.error(error);
+    }
+  });
 });
 
 const PORT = 8080;
